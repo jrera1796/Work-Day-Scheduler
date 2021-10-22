@@ -1,4 +1,4 @@
-var currentDateTime = moment().format("MMMM, DD, YYYY, HH:MM");
+var currentDateTime = moment().format("MMMM, DD, YYYY, HH:mm");
 var currentHour = moment().hour();
 var currentTime = moment().format("H");
 
@@ -86,3 +86,5 @@ $('savedUserData').data([1], [1]);
   };
   
   loadSavedUserData();
+
+  
