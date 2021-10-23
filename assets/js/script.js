@@ -26,7 +26,6 @@ var loadBlockColors = function(){
 
 for(var i = 0; i < momTimeArray.length; i++){
 
-//If data id matches textarea id get 
 
 var textAreaText = document.getElementById(timeBlockEl[i]);
 textAreaText.value = localStorage.getItem(timeBlockEl[i]);
