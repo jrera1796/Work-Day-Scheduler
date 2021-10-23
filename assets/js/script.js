@@ -22,35 +22,47 @@ var momTimeArray = [
 
 var savedUserData = {};
 
+var loadBlockColors = function(){
+
 for(var i = 0; i < momTimeArray.length; i++){
 
+//If data id matches textarea id get 
+
+var textAreaText = document.getElementById(timeBlockEl[i]);
+textAreaText.value = localStorage.getItem(timeBlockEl[i]);
+
 if(moment().isSame(momTimeArray[i], 'hour')){
-document.getElementById(timeBlockEl[i]).setAttribute("class", "present col-8")
-// console.log("this time is CORRECT")
-// console.log(timeBlockEl[i])
+document.getElementById(timeBlockEl[i]).setAttribute("class", "present col-8 t-box")
+document.getElementById(timeBlockEl[i]).textContent;
+
 }
 
 if(moment().isAfter(momTimeArray[i], 'hour')){
-document.getElementById(timeBlockEl[i]).setAttribute("class", "past col-8")
-// console.log("this time is CORRECT")
-// console.log(timeBlockEl[i])
+document.getElementById(timeBlockEl[i]).setAttribute("class", "past col-8 t-box")
+
 }
 
 if(moment().isBefore(momTimeArray[i], 'hour')){
-document.getElementById(timeBlockEl[i]).setAttribute("class", "future col-8")
-// console.log("this time is CORRECT")
-// console.log(timeBlockEl[i])
+document.getElementById(timeBlockEl[i]).setAttribute("class", "future col-8 t-box")
+
 }
+}
+
+$(".saveBtn").on("click", grabText);
 };
 
 
-
-
+function grabText(event){
+  
+  var savedId = $(this).parent().attr("data-id");
+  var savedText = $(this).siblings(".t-box").val();
+  localStorage.setItem(savedId, savedText);
+  console.log(savedText);
+};
 
 var loadSavedUserData = function() {
-  tasks = JSON.parse(localStorage.getItem("savedUserData"));
-
-  // if nothing in localStorage, create a new object to track all task status arrays
+  savedData = JSON.parse(localStorage.getItem("savedUserData"));
+// if nothing in localStorage, create a new object to track all task status arrays
   if (!savedUserData) {
     savedUserData = {
       T9: [],
@@ -63,28 +75,19 @@ var loadSavedUserData = function() {
       T16: [],
       T17: []
     };
-  
   }
+  //loop over object properties
+      $.each(savedUserData, function(list, arr) {
+        console.log(list, arr);
+        // then loop over sub-array
+        arr.forEach(function(userdataobj) {
+          grabText(savedId, savedText);
+        });
+});
+};
 
-$('savedUserData').data([1], [1]);
-  localStorage.setItem(this);
-
-
-  var saveUserData = function() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
-
-  
-    // loop over object properties
-    $.each(tasks, function(list, arr) {
-      console.log(list, arr);
-      // then loop over sub-array
-      arr.forEach(function(task) {
-        createTask(task.text, task.date, list);
-      });
-    });
-  };
-  
   loadSavedUserData();
-
-  
+ 
+  $(document).ready(() => {
+    loadBlockColors();
+    });
